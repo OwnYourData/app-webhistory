@@ -1,0 +1,16 @@
+{
+        "name":"Webhistory",
+        "identifier":"eu.ownyourdata.webhistory",
+        "type":"external",
+        "description":"Der Browserverlauf bietet wertvolle Informationen über jeweils aktuelle Themen und verwendete Zeit.",
+        "permissions":[
+                "eu.ownyourdata.info:read",
+                "eu.ownyourdata.info:write",
+                "eu.ownyourdata.info:update",
+                "eu.ownyourdata.webhistory:read",
+                "eu.ownyourdata.webhistory:write",
+                "eu.ownyourdata.webhistory:update",
+                "eu.ownyourdata.webhistory:delete",
+                "eu.ownyourdata.webhistory.log:read",
+                "eu.ownyourdata.webhistory.log:write"]
+}
