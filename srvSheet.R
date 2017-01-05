@@ -104,102 +104,104 @@ rhotRender <- function(DF, fieldWidths){
 }
 
 hot_dat2DF <- function(data, repoStruct, orderDecreasing){
-        DF <- data.frame()
-        fields <- repoStruct[['fields']] 
-        fieldKey <- repoStruct[['fieldKey']] 
-        fieldTypes <- repoStruct[['fieldTypes']] 
-        fieldInits <- repoStruct[['fieldInits']] 
-        fieldTitles <- repoStruct[['fieldTitles']]
-        cat('step1')
+        data.frame()
         
-        initVal <- vector()
-        for(i in 1:length(fields)){
-                switch(fieldInits[i],
-                       today = {
-                               initVal <- c(initVal, 
-                                            as.character(as.Date(Sys.Date())))
-                       },
-                       zero = {
-                               initVal <- c(initVal, 
-                                            0)
-                       },
-                       false = {
-                               initVal <- c(initVal, 
-                                            FALSE)
-                       }, 
-                       empty = {
-                               initVal <- c(initVal, 
-                                            '')
-                       }
-                )
-        }
-        cat('step2')
-        names(initVal) <- fields
-        initVal <- data.frame(lapply(initVal, type.convert),
-                              stringsAsFactors=FALSE)
-        if(nrow(data) > 0){
-                data <- data[, fields, drop=FALSE]
-                data <- data[!is.na(data[fieldKey]), , drop=FALSE]
-                if(fieldTypes[match(fieldKey, fields)] == 'date'){
-                        data <- data[as.character(data[fieldKey]) != '', , drop=FALSE]
-                        data <- data[as.character(data[fieldKey]) != 'NA', , drop=FALSE]
-                } else {
-                        data <- data[data[fieldKey] != '', , drop=FALSE]
-                        data <- data[data[fieldKey] != 'NA', , drop=FALSE]
-                }
-                DF <- rbind(data, initVal)
-        }
-        cat('step3')
-        if(nrow(data) == 0){
-                DF <- initVal
-        }
-        
-        for(i in 1:length(fields)){
-                switch(fieldTypes[i],
-                       date = {
-                               DF[, fields[i]] <-
-                                       as.Date(DF[, fields[i]], 
-                                               origin="1970-01-01")
-                       },
-                       timestamp = {
-                               DF[, fields[i]] <- 
-                                       as.integer(DF[, fields[i]])
-                               
-                       },
-                       boolean = {
-                               DF[, fields[i]] <-
-                                       as.logical(DF[, fields[i]])
-                       },
-                       integer = {
-                               DF[, fields[i]] <-
-                                       as.integer(DF[, fields[i]])
-                       }, 
-                       double = {
-                               DF[, fields[i]] <-
-                                       as.double(DF[, fields[i]])
-                       }, 
-                       string = {
-                               DF[, fields[i]] <-
-                                       as.character(DF[, fields[i]])
-                       }
-                )
-        }
-        cat('step4')
-        if(!missing(orderDecreasing)) {
-                if(nrow(DF) > 1){
-                        DF <- DF[order(DF[, fieldKey, drop=FALSE], 
-                                       decreasing = orderDecreasing), , 
-                                 drop=FALSE]
-                }
-                if(!is.null(nrow(DF))){
-                        rownames(DF) <- 1:nrow(DF)
-                }
-        }
-        if(!is.null(nrow(DF))){
-                colnames(DF) <- fieldTitles
-        }
-        cat('step5')
-        DF
+        # DF <- data.frame()
+        # fields <- repoStruct[['fields']] 
+        # fieldKey <- repoStruct[['fieldKey']] 
+        # fieldTypes <- repoStruct[['fieldTypes']] 
+        # fieldInits <- repoStruct[['fieldInits']] 
+        # fieldTitles <- repoStruct[['fieldTitles']]
+        # cat('step1')
+        # 
+        # initVal <- vector()
+        # for(i in 1:length(fields)){
+        #         switch(fieldInits[i],
+        #                today = {
+        #                        initVal <- c(initVal, 
+        #                                     as.character(as.Date(Sys.Date())))
+        #                },
+        #                zero = {
+        #                        initVal <- c(initVal, 
+        #                                     0)
+        #                },
+        #                false = {
+        #                        initVal <- c(initVal, 
+        #                                     FALSE)
+        #                }, 
+        #                empty = {
+        #                        initVal <- c(initVal, 
+        #                                     '')
+        #                }
+        #         )
+        # }
+        # cat('step2')
+        # names(initVal) <- fields
+        # initVal <- data.frame(lapply(initVal, type.convert),
+        #                       stringsAsFactors=FALSE)
+        # if(nrow(data) > 0){
+        #         data <- data[, fields, drop=FALSE]
+        #         data <- data[!is.na(data[fieldKey]), , drop=FALSE]
+        #         if(fieldTypes[match(fieldKey, fields)] == 'date'){
+        #                 data <- data[as.character(data[fieldKey]) != '', , drop=FALSE]
+        #                 data <- data[as.character(data[fieldKey]) != 'NA', , drop=FALSE]
+        #         } else {
+        #                 data <- data[data[fieldKey] != '', , drop=FALSE]
+        #                 data <- data[data[fieldKey] != 'NA', , drop=FALSE]
+        #         }
+        #         DF <- rbind(data, initVal)
+        # }
+        # cat('step3')
+        # if(nrow(data) == 0){
+        #         DF <- initVal
+        # }
+        # 
+        # for(i in 1:length(fields)){
+        #         switch(fieldTypes[i],
+        #                date = {
+        #                        DF[, fields[i]] <-
+        #                                as.Date(DF[, fields[i]], 
+        #                                        origin="1970-01-01")
+        #                },
+        #                timestamp = {
+        #                        DF[, fields[i]] <- 
+        #                                as.integer(DF[, fields[i]])
+        #                        
+        #                },
+        #                boolean = {
+        #                        DF[, fields[i]] <-
+        #                                as.logical(DF[, fields[i]])
+        #                },
+        #                integer = {
+        #                        DF[, fields[i]] <-
+        #                                as.integer(DF[, fields[i]])
+        #                }, 
+        #                double = {
+        #                        DF[, fields[i]] <-
+        #                                as.double(DF[, fields[i]])
+        #                }, 
+        #                string = {
+        #                        DF[, fields[i]] <-
+        #                                as.character(DF[, fields[i]])
+        #                }
+        #         )
+        # }
+        # cat('step4')
+        # if(!missing(orderDecreasing)) {
+        #         if(nrow(DF) > 1){
+        #                 DF <- DF[order(DF[, fieldKey, drop=FALSE], 
+        #                                decreasing = orderDecreasing), , 
+        #                          drop=FALSE]
+        #         }
+        #         if(!is.null(nrow(DF))){
+        #                 rownames(DF) <- 1:nrow(DF)
+        #         }
+        # }
+        # if(!is.null(nrow(DF))){
+        #         colnames(DF) <- fieldTitles
+        # }
+        # cat('step5')
+        # DF
 }
 
 observe({
