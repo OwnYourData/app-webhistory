@@ -110,7 +110,6 @@ hot_dat2DF <- function(data, repoStruct, orderDecreasing){
         fieldTypes <- repoStruct[['fieldTypes']]
         fieldInits <- repoStruct[['fieldInits']]
         fieldTitles <- repoStruct[['fieldTitles']]
-        cat('step1')
 
         initVal <- vector()
         for(i in 1:length(fields)){
@@ -133,7 +132,6 @@ hot_dat2DF <- function(data, repoStruct, orderDecreasing){
                        }
                 )
         }
-        cat('step2')
         names(initVal) <- fields
         initVal <- data.frame(lapply(initVal, type.convert),
                               stringsAsFactors=FALSE)
@@ -183,17 +181,16 @@ hot_dat2DF <- function(data, repoStruct, orderDecreasing){
         #                }
         #         )
         # }
-        # cat('step4')
-        # if(!missing(orderDecreasing)) {
-        #         if(nrow(DF) > 1){
-        #                 DF <- DF[order(DF[, fieldKey, drop=FALSE], 
-        #                                decreasing = orderDecreasing), , 
-        #                          drop=FALSE]
-        #         }
-        #         if(!is.null(nrow(DF))){
-        #                 rownames(DF) <- 1:nrow(DF)
-        #         }
-        # }
+        if(!missing(orderDecreasing)) {
+                if(nrow(DF) > 1){
+                        DF <- DF[order(DF[, fieldKey, drop=FALSE],
+                                       decreasing = orderDecreasing), ,
+                                 drop=FALSE]
+                }
+                if(!is.null(nrow(DF))){
+                        rownames(DF) <- 1:nrow(DF)
+                }
+        }
         if(!is.null(nrow(DF))){
                 colnames(DF) <- fieldTitles
         }
