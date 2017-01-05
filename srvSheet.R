@@ -151,13 +151,13 @@ hot_dat2DF <- function(data, repoStruct, orderDecreasing){
                 DF <- initVal
         }
 
-        # for(i in 1:length(fields)){
-        #         switch(fieldTypes[i],
-        #                date = {
-        #                        DF[, fields[i]] <-
-        #                                as.Date(DF[, fields[i]], 
-        #                                        origin="1970-01-01")
-        #                },
+        for(i in 1:length(fields)){
+                switch(fieldTypes[i],
+                       date = {
+                               DF[, fields[i]] <-
+                                       as.Date(DF[, fields[i]],
+                                               origin="1970-01-01")
+                       },
         #                timestamp = {
         #                        DF[, fields[i]] <- 
         #                                as.integer(DF[, fields[i]])
@@ -175,12 +175,12 @@ hot_dat2DF <- function(data, repoStruct, orderDecreasing){
         #                        DF[, fields[i]] <-
         #                                as.double(DF[, fields[i]])
         #                }, 
-        #                string = {
-        #                        DF[, fields[i]] <-
-        #                                as.character(DF[, fields[i]])
-        #                }
-        #         )
-        # }
+                       string = {
+                               DF[, fields[i]] <-
+                                       as.character(DF[, fields[i]])
+                       }
+                )
+        }
         if(!missing(orderDecreasing)) {
                 if(nrow(DF) > 1){
                         DF <- DF[order(DF[, fieldKey, drop=FALSE],
