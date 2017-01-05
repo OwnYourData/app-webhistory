@@ -149,7 +149,6 @@ hot_dat2DF <- function(data, repoStruct, orderDecreasing){
         #         }
         #         DF <- rbind(data, initVal)
         # }
-        # cat('step3')
         # if(nrow(data) == 0){
                 DF <- initVal
         # }
@@ -195,10 +194,9 @@ hot_dat2DF <- function(data, repoStruct, orderDecreasing){
         #                 rownames(DF) <- 1:nrow(DF)
         #         }
         # }
-        # if(!is.null(nrow(DF))){
-        #         colnames(DF) <- fieldTitles
-        # }
-        # cat('step5')
+        if(!is.null(nrow(DF))){
+                colnames(DF) <- fieldTitles
+        }
         DF
 }
 
