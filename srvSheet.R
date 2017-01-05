@@ -158,11 +158,11 @@ hot_dat2DF <- function(data, repoStruct, orderDecreasing){
                                        as.Date(DF[, fields[i]],
                                                origin="1970-01-01")
                        },
-        #                timestamp = {
-        #                        DF[, fields[i]] <- 
-        #                                as.integer(DF[, fields[i]])
-        #                        
-        #                },
+                       timestamp = {
+                               DF[, fields[i]] <-
+                                       as.integer(DF[, fields[i]])
+
+                       },
                        boolean = {
                                DF[, fields[i]] <-
                                        as.logical(DF[, fields[i]])
