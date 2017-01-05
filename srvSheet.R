@@ -145,7 +145,6 @@ hot_dat2DF <- function(data, repoStruct, orderDecreasing){
                         data <- data[data[fieldKey] != '', , drop=FALSE]
                         data <- data[data[fieldKey] != 'NA', , drop=FALSE]
                 }
-                save(data, initVal, file="tmpSheet.RData")
                 DF <- rbind(data, initVal)
         }
         if(nrow(data) == 0){
