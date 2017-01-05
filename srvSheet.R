@@ -104,41 +104,39 @@ rhotRender <- function(DF, fieldWidths){
 }
 
 hot_dat2DF <- function(data, repoStruct, orderDecreasing){
-        data.frame()
-        
-        # DF <- data.frame()
-        # fields <- repoStruct[['fields']] 
-        # fieldKey <- repoStruct[['fieldKey']] 
-        # fieldTypes <- repoStruct[['fieldTypes']] 
-        # fieldInits <- repoStruct[['fieldInits']] 
-        # fieldTitles <- repoStruct[['fieldTitles']]
-        # cat('step1')
-        # 
-        # initVal <- vector()
-        # for(i in 1:length(fields)){
-        #         switch(fieldInits[i],
-        #                today = {
-        #                        initVal <- c(initVal, 
-        #                                     as.character(as.Date(Sys.Date())))
-        #                },
-        #                zero = {
-        #                        initVal <- c(initVal, 
-        #                                     0)
-        #                },
-        #                false = {
-        #                        initVal <- c(initVal, 
-        #                                     FALSE)
-        #                }, 
-        #                empty = {
-        #                        initVal <- c(initVal, 
-        #                                     '')
-        #                }
-        #         )
-        # }
-        # cat('step2')
-        # names(initVal) <- fields
-        # initVal <- data.frame(lapply(initVal, type.convert),
-        #                       stringsAsFactors=FALSE)
+        DF <- data.frame()
+        fields <- repoStruct[['fields']]
+        fieldKey <- repoStruct[['fieldKey']]
+        fieldTypes <- repoStruct[['fieldTypes']]
+        fieldInits <- repoStruct[['fieldInits']]
+        fieldTitles <- repoStruct[['fieldTitles']]
+        cat('step1')
+
+        initVal <- vector()
+        for(i in 1:length(fields)){
+                switch(fieldInits[i],
+                       today = {
+                               initVal <- c(initVal,
+                                            as.character(as.Date(Sys.Date())))
+                       },
+                       zero = {
+                               initVal <- c(initVal,
+                                            0)
+                       },
+                       false = {
+                               initVal <- c(initVal,
+                                            FALSE)
+                       },
+                       empty = {
+                               initVal <- c(initVal,
+                                            '')
+                       }
+                )
+        }
+        cat('step2')
+        names(initVal) <- fields
+        initVal <- data.frame(lapply(initVal, type.convert),
+                              stringsAsFactors=FALSE)
         # if(nrow(data) > 0){
         #         data <- data[, fields, drop=FALSE]
         #         data <- data[!is.na(data[fieldKey]), , drop=FALSE]
@@ -153,7 +151,7 @@ hot_dat2DF <- function(data, repoStruct, orderDecreasing){
         # }
         # cat('step3')
         # if(nrow(data) == 0){
-        #         DF <- initVal
+                DF <- initVal
         # }
         # 
         # for(i in 1:length(fields)){
@@ -201,7 +199,7 @@ hot_dat2DF <- function(data, repoStruct, orderDecreasing){
         #         colnames(DF) <- fieldTitles
         # }
         # cat('step5')
-        # DF
+        DF
 }
 
 observe({
