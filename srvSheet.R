@@ -163,18 +163,18 @@ hot_dat2DF <- function(data, repoStruct, orderDecreasing){
         #                                as.integer(DF[, fields[i]])
         #                        
         #                },
-        #                boolean = {
-        #                        DF[, fields[i]] <-
-        #                                as.logical(DF[, fields[i]])
-        #                },
-        #                integer = {
-        #                        DF[, fields[i]] <-
-        #                                as.integer(DF[, fields[i]])
-        #                }, 
-        #                double = {
-        #                        DF[, fields[i]] <-
-        #                                as.double(DF[, fields[i]])
-        #                }, 
+                       boolean = {
+                               DF[, fields[i]] <-
+                                       as.logical(DF[, fields[i]])
+                       },
+                       integer = {
+                               DF[, fields[i]] <-
+                                       as.integer(DF[, fields[i]])
+                       },
+                       double = {
+                               DF[, fields[i]] <-
+                                       as.double(DF[, fields[i]])
+                       },
                        string = {
                                DF[, fields[i]] <-
                                        as.character(DF[, fields[i]])
