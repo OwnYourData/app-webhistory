@@ -135,22 +135,22 @@ hot_dat2DF <- function(data, repoStruct, orderDecreasing){
         names(initVal) <- fields
         initVal <- data.frame(lapply(initVal, type.convert),
                               stringsAsFactors=FALSE)
-        # if(nrow(data) > 0){
-        #         data <- data[, fields, drop=FALSE]
-        #         data <- data[!is.na(data[fieldKey]), , drop=FALSE]
-        #         if(fieldTypes[match(fieldKey, fields)] == 'date'){
-        #                 data <- data[as.character(data[fieldKey]) != '', , drop=FALSE]
-        #                 data <- data[as.character(data[fieldKey]) != 'NA', , drop=FALSE]
-        #         } else {
-        #                 data <- data[data[fieldKey] != '', , drop=FALSE]
-        #                 data <- data[data[fieldKey] != 'NA', , drop=FALSE]
-        #         }
-        #         DF <- rbind(data, initVal)
-        # }
-        # if(nrow(data) == 0){
+        if(nrow(data) > 0){
+                data <- data[, fields, drop=FALSE]
+                data <- data[!is.na(data[fieldKey]), , drop=FALSE]
+                if(fieldTypes[match(fieldKey, fields)] == 'date'){
+                        data <- data[as.character(data[fieldKey]) != '', , drop=FALSE]
+                        data <- data[as.character(data[fieldKey]) != 'NA', , drop=FALSE]
+                } else {
+                        data <- data[data[fieldKey] != '', , drop=FALSE]
+                        data <- data[data[fieldKey] != 'NA', , drop=FALSE]
+                }
+                DF <- rbind(data, initVal)
+        }
+        if(nrow(data) == 0){
                 DF <- initVal
-        # }
-        # 
+        }
+
         # for(i in 1:length(fields)){
         #         switch(fieldTypes[i],
         #                date = {
