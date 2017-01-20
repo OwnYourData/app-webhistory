@@ -9,8 +9,25 @@ appSource <- function(){
                        # uiOutput('desktopUiSourceItemsRender')
                        tabsetPanel(
                                type='tabs',
-                               tabPanel('Tab1',
-                                        p('hello world')
+                               tabPanel('Browser Plugins',
+                                        fluidRow(column(11, 
+                                                        offset=1,
+                                                        br(),
+                                                        helpText('Wähle das Plugin für den von dir verwendeten Browser und folge der Anleitung zur Installation:'),
+                                                        p(
+                                                                img(src='chrome.png', width='50px', alt='Chrome'),
+                                                                span('Chrome Erweiterung:'),
+                                                                a('herunterladen', href='https://github.com/OwnYourData/ext-webhistory_chrome'),
+                                                                span('('),
+                                                                a('Anleitung zur Installation', href='https://github.com/OwnYourData/ext-webhistory_chrome'),
+                                                                span(')')),
+                                                        p(
+                                                                img(src='firefox.png', width='50px', alt='Chrome'),
+                                                                span('bald verfügbar')),
+                                                        p(
+                                                                img(src='safari.png', width='50px', alt='Chrome'),
+                                                                span('bald verfügbar')))
+                                        )
                                )
                        )
                 )

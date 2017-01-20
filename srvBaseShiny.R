@@ -57,7 +57,7 @@ currApp <- reactive({
                 closeAlert(session, 'myPiaStatus')
                 
                 # set alert for missing email config
-                url <- itemsUrl(app[['url']], schedulerEmailConfigKey())
+                url <- itemsUrl(app[['url']], schedulerEmailConfigKey)
                 data <- list(server=input$modalMailerAddress,
                              port=input$modalMailerPort,
                              user=input$modalMailerUser,
@@ -72,4 +72,52 @@ currApp <- reactive({
                 }
         }
         app
+})
+
+currData <- reactive({
+        # list any input controls that effect currData
+        app <- currApp()
+        if(length(app) > 0) {
+                url <- itemsUrl(app[['url']], 
+                                paste0(app[['app_key']]))
+                piaData <- readItems(app, url)
+        } else {
+                piaData <- data.frame()
+        }
+        piaData
+})
+
+currDataDateSelectTimestamp <- reactive({
+        closeAlert(session, 'myDataStatus')
+        data <- currData()
+        if(nrow(data) > 0){
+                mymin <- as.Date(input$dateRange[1], '%d.%m.%Y')
+                mymax <- as.Date(input$dateRange[2], '%d.%m.%Y')
+                if(mymax > mymin){
+                        daterange <- seq(mymin, mymax, 'days')
+                        data$dat <- as.Date(as.POSIXct(data$time/1000, origin='1970-01-01'))
+                        data <- data[data$dat %in% daterange, ]
+                        if(nrow(data) > 0){
+                                data
+                        } else {
+                                createAlert(session, 'dataStatus', alertId = 'myDataStatus',
+                                            style = 'warning', append = FALSE,
+                                            title = 'Keine Daten im gewählten Zeitfenster',
+                                            content = 'Für das ausgewählte Zeitfenster sind keine Daten vorhanden.')
+                                data.frame()
+                        }
+                } else {
+                        createAlert(session, 'dataStatus', alertId = 'myDataStatus',
+                                    style = 'warning', append = FALSE,
+                                    title = 'Ungültiges Zeitfenster',
+                                    content = 'Im ausgewählten Zeitfenster liegt das End-Datum vor dem Beginn-Datum. Korriege die Eingabe!')
+                        data.frame()
+                }
+        } else {
+                createAlert(session, 'dataStatus', alertId = 'myDataStatus',
+                            style = 'warning', append = FALSE,
+                            title = 'Keine Website-Daten im Datentresor vorhanden',
+                            content = 'Derzeit sind noch keine Website-Daten im Datentresor gespeichert. Wechsle zu "Datenquellen" und installiere das passende Plugin für deinen Browser!')
+                data.frame()
+        }
 })

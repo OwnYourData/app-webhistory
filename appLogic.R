@@ -24,15 +24,14 @@ repoData <- function(repo){
         data
 }
 
-currData <- reactive({
-        # list any input controls that effect currData
-        app <- currApp()
-        if(length(app) > 0) {
-                url <- itemsUrl(app[['url']], 
-                                paste0(app[['app_key']]))
-                piaData <- readItems(app, url)
+output$Top10Sites <- renderTable({
+        data <- currDataDateSelectTimestamp()
+        if(nrow(data) > 0){
+                df <- as.data.frame(table(data$url))
+                df <- df[with(df, order(-Freq)), ]
+                colnames(df) <- c('Website', 'Anzahl')
+                head(df, input$maxWebsites)
         } else {
-                piaData <- data.frame()
+                data.frame()
         }
-        piaData
 })

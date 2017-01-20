@@ -2,6 +2,7 @@
 # last update: 2016-10-10
 
 source('uiStatusDateSelect.R')
+source('appStatusWeblist.R')
 # source('uiStatusItemConfig.R')
 
 appStatus <- function(){
@@ -11,8 +12,8 @@ appStatus <- function(){
                        uiStatusDateSelect(),
                        bsAlert('dataStatus'),
                        tabsetPanel(type='tabs',
-                                   tabPanel('Tab1', br(),
-                                            p('hello world')
+                                   tabPanel('Häufig besuchte Webseiten', br(),
+                                            appStatusWeblist()
                                    )
                        )
                 )

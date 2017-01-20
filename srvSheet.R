@@ -105,29 +105,29 @@ rhotRender <- function(DF, fieldWidths){
 
 hot_dat2DF <- function(data, repoStruct, orderDecreasing){
         DF <- data.frame()
-        fields <- repoStruct[['fields']]
-        fieldKey <- repoStruct[['fieldKey']]
-        fieldTypes <- repoStruct[['fieldTypes']]
-        fieldInits <- repoStruct[['fieldInits']]
+        fields <- repoStruct[['fields']] 
+        fieldKey <- repoStruct[['fieldKey']] 
+        fieldTypes <- repoStruct[['fieldTypes']] 
+        fieldInits <- repoStruct[['fieldInits']] 
         fieldTitles <- repoStruct[['fieldTitles']]
-
+        
         initVal <- vector()
         for(i in 1:length(fields)){
                 switch(fieldInits[i],
                        today = {
-                               initVal <- c(initVal,
+                               initVal <- c(initVal, 
                                             as.character(as.Date(Sys.Date())))
                        },
                        zero = {
-                               initVal <- c(initVal,
+                               initVal <- c(initVal, 
                                             0)
                        },
                        false = {
-                               initVal <- c(initVal,
+                               initVal <- c(initVal, 
                                             FALSE)
-                       },
+                       }, 
                        empty = {
-                               initVal <- c(initVal,
+                               initVal <- c(initVal, 
                                             '')
                        }
                 )
@@ -150,17 +150,18 @@ hot_dat2DF <- function(data, repoStruct, orderDecreasing){
         if(nrow(data) == 0){
                 DF <- initVal
         }
-
+        
         for(i in 1:length(fields)){
                 switch(fieldTypes[i],
                        date = {
                                DF[, fields[i]] <-
-                                       as.Date(DF[, fields[i]],
+                                       as.Date(DF[, fields[i]], 
                                                origin="1970-01-01")
                        },
                        timestamp = {
-                               DF[, fields[i]] <-
-                                       as.character(DF[, fields[i]])
+                               DF[, fields[i]] <- 
+                                       as.integer(DF[, fields[i]])
+                               
                        },
                        boolean = {
                                DF[, fields[i]] <-
@@ -169,11 +170,11 @@ hot_dat2DF <- function(data, repoStruct, orderDecreasing){
                        integer = {
                                DF[, fields[i]] <-
                                        as.integer(DF[, fields[i]])
-                       },
+                       }, 
                        double = {
                                DF[, fields[i]] <-
                                        as.double(DF[, fields[i]])
-                       },
+                       }, 
                        string = {
                                DF[, fields[i]] <-
                                        as.character(DF[, fields[i]])
@@ -182,8 +183,8 @@ hot_dat2DF <- function(data, repoStruct, orderDecreasing){
         }
         if(!missing(orderDecreasing)) {
                 if(nrow(DF) > 1){
-                        DF <- DF[order(DF[, fieldKey, drop=FALSE],
-                                       decreasing = orderDecreasing), ,
+                        DF <- DF[order(DF[, fieldKey, drop=FALSE], 
+                                       decreasing = orderDecreasing), , 
                                  drop=FALSE]
                 }
                 if(!is.null(nrow(DF))){
@@ -291,6 +292,7 @@ writeLog <- function(logText){
                 repoUrl <- itemsUrl(app[['url']], 
                                     appRepos[['Verlauf']])
                 dataItem <- list(
+                        `_oydRepoName` = 'Protokoll',
                         date = as.character(Sys.time()),
                         description = logText)
                 writeItem(app, repoUrl, dataItem)
