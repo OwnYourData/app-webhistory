@@ -12,8 +12,8 @@ appRepos <- list(Webhistory = 'eu.ownyourdata.webhistory',
                  Verlauf = 'eu.ownyourdata.webhistory.log')
 appStruct <- list(
         Webhistory = list(
-                fields      = c('time', 'url'),
-                fieldKey    = 'time',
+                fields      = c('timestamp', 'url'),
+                fieldKey    = 'timestamp',
                 fieldTypes  = c('timestamp', 'string'),
                 fieldInits  = c('empty', 'empty'),
                 fieldTitles = c('Zeit', 'URL'),

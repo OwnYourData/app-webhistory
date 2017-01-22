@@ -104,7 +104,6 @@ rhotRender <- function(DF, fieldWidths){
 }
 
 hot_dat2DF <- function(data, repoStruct, orderDecreasing){
-        stop()
         DF <- data.frame()
         fields <- repoStruct[['fields']] 
         fieldKey <- repoStruct[['fieldKey']] 
@@ -161,7 +160,7 @@ hot_dat2DF <- function(data, repoStruct, orderDecreasing){
                        },
                        timestamp = {
                                DF[, fields[i]] <- 
-                                       as.integer(DF[, fields[i]])
+                                       as.double(DF[, fields[i]])
                                
                        },
                        boolean = {
