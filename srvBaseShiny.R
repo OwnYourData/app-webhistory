@@ -95,7 +95,7 @@ currDataDateSelectTimestamp <- reactive({
                 mymax <- as.Date(input$dateRange[2], '%d.%m.%Y')
                 if(mymax > mymin){
                         daterange <- seq(mymin, mymax, 'days')
-                        data$dat <- as.Date(as.POSIXct(data$timestamp/1000, origin='1970-01-01'))
+                        data$dat <- as.Date(as.POSIXct(data$time/1000, origin='1970-01-01'))
                         data <- data[data$dat %in% daterange, ]
                         if(nrow(data) > 0){
                                 data

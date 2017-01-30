@@ -3,6 +3,7 @@
 
 source('srvDateselect.R', local=TRUE)
 source('srvEmail.R', local=TRUE)
+source('srvScheduler.R', local=TRUE)
 
 # any record manipulations before storing a record
 appData <- function(record){
