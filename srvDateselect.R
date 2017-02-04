@@ -34,12 +34,15 @@ observe({
                                start = as.Date(Sys.Date() - months(12)),
                                end = as.Date(Sys.Date())) },
                        '10'={ data <- currData()
-                       myStart <- min(as.Date(data$date), na.rm=TRUE)
-                       myEnd <- max(as.Date(data$date), na.rm=TRUE)
-                       updateDateRangeInput(session, 'dateRange',
-                                            start = myStart,
-                                            end = myEnd) },
-                       {})
+                                if('timestamp' %in% colnames(data)){
+                                        data$date <- as.POSIXct(data$timestamp, origin="1970-01-01")
+                                }
+                                myStart <- min(as.Date(data$date), na.rm=TRUE)
+                                myEnd <- max(as.Date(data$date), na.rm=TRUE)
+                                updateDateRangeInput(session, 'dateRange',
+                                start = myStart,
+                                end = myEnd) }
+                       )
         }
 })
 
