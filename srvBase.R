@@ -121,7 +121,6 @@ readItems <- function(app, repo_url) {
                                         error = function(e) { return(NA) })
                                 subData <- r2d(response)
                                 if(nrow(respData)>0){
-                                        save(respData, subData, file='tmpRead.RData')
                                         respData <- rbind(respData, subData)
                                 } else {
                                         respData <- subData
