@@ -6,8 +6,10 @@
 ###########################################################
 # Update this line with the R packages to install:
 
-my_packages = c('shiny', 
-                'shinyBS', 
+packageurl <- "http://cran.r-project.org/src/contrib/Archive/shiny/shiny_0.13.2.tar.gz"
+install.packages(packageurl, repos=NULL, type="source")
+
+my_packages = c('shinyBS', 
                 'devtools',
                 'RCurl', 
                 'httr',
