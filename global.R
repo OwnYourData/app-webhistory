@@ -3,7 +3,7 @@
 
 # Comments ================================================
 # - run locally
-#   runApp('~/cs/ownyourdata/apps/webhistory', host='0.0.0.0', port=1239)
+#   runApp('~/oyd/webhistory', host='0.0.0.0', port=1239)
 # - copy files to Github
 #   cp -r *.R *.r *.txt www docker github/app-webhistory; cd github/app-webhistory;
 
