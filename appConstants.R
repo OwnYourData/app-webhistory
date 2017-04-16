@@ -5,6 +5,7 @@
 appName <- 'webhistory'
 appTitle <- 'Webhistory'
 app_id <- 'eu.ownyourdata.webhistory'
+helpUrl <- 'https://www.ownyourdata.eu/apps/webhistory/'
 
 # definition of data structure
 currRepoSelect <- ''
