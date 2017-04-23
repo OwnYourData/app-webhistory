@@ -23,11 +23,11 @@ observe({
                                                   start = as.Date(Sys.Date() %m-% months(12)),
                                                   end = as.Date(Sys.Date())) },
                        '10'={ data <- currData()
-                       myStart <- min(as.Date(data$date), na.rm=TRUE)
-                       myEnd <- max(as.Date(data$date), na.rm=TRUE)
-                       updateDateRangeInput(session, 'dateRange',
-                                            start = myStart,
-                                            end = myEnd) },
+                               myStart <- min(as.Date(as.POSIXct(data$timestamp/1000, origin = '1970-01-01')), na.rm=TRUE)
+                               myEnd <- max(as.Date(as.POSIXct(data$timestamp/1000, origin = '1970-01-01')), na.rm=TRUE)
+                               updateDateRangeInput(session, 'dateRange',
+                                                    start = myStart,
+                                                    end = myEnd) },
                        {})
         }
 })
